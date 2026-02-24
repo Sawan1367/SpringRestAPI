@@ -24,9 +24,10 @@ public class Student {
 	
 	@Column(name = "email")
 	private String email;
+	
+	public Student() {}
 
 	public Student(Long id, String name, String email) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;

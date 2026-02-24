@@ -5,6 +5,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.practice.restapi.dto.AddStudentRequestDTO;
 import com.practice.restapi.dto.StudentDTO;
 import com.practice.restapi.entity.Student;
 import com.practice.restapi.repository.StudentRepository;
@@ -35,6 +36,21 @@ public class StudentServiceImpl implements StudentService {
 	public StudentDTO getStudentById(Long id) {
 		Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student not found with id : " + id));
 		return modelMapper.map(student, StudentDTO.class);
+	}
+
+	@Override
+	public StudentDTO createNewStudent(AddStudentRequestDTO addStudentRequestDTO) {
+		Student newStudent = modelMapper.map(addStudentRequestDTO, Student.class);
+		Student student = studentRepository.save(newStudent);
+		return modelMapper.map(student, StudentDTO.class);
+	}
+
+	@Override
+	public void deleteStudentById(Long id) {
+		if(!studentRepository.existsById(id)) {
+			throw new IllegalArgumentException("Student doesn't exists with id : " + id);
+		}
+		studentRepository.deleteById(id);
 	}
 	
 }

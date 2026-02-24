@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class ModelMapperConfig {
 
 	/**
-	 * It monitors the fields to convert the data from java object to db entities
+	 * It monitors the fields to convert the data from java object to db entities and vice-versa
 	 * @return
 	 */
     @Bean
